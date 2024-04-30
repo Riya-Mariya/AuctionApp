@@ -12,12 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/auction/product")
@@ -36,14 +33,16 @@ public class BidController {
             var errorsMap = dataValidator.validateInputData(result);
             return ResponseEntity.badRequest().body(errorsMap);
         }
-        try {
-            Bid bid = bidService.placeBid(bidDto);
-            return ResponseEntity.ok(bid);
-        } catch (Exception e) {
-            logger.error("Exception while placing the bid {}", e.getMessage());
-            return ResponseEntity.badRequest().body("Error while placing bid");
-        }
+        Bid bid = bidService.placeBid(bidDto);
+        return ResponseEntity.ok(bid);
 
+    }
+
+    @GetMapping("/{productId}/getBid")
+    @PreAuthorize("hasAuthority('SELLER')")
+    public ResponseEntity<Object> getBidDetails(@PathVariable Long productId) {
+        List<Bid> bid = bidService.getBidDetails(productId);
+        return ResponseEntity.ok(bid);
 
     }
 

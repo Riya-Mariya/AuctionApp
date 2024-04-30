@@ -1,6 +1,6 @@
 package com.bidding.auction.dtos;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,9 +13,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 public class BidDto {
-    @NotEmpty
+    @NotNull(message = "Amount cannot be empty")
     private BigDecimal amount;
-    @NotEmpty
+    @NotNull(message = "Product Id cannot be empty")
     private Long productId;
 }
 

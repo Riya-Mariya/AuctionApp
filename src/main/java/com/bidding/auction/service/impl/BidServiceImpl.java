@@ -2,6 +2,7 @@ package com.bidding.auction.service.impl;
 
 import com.bidding.auction.dtos.BidDto;
 import com.bidding.auction.exception.BidLowAmountException;
+import com.bidding.auction.exception.BidNotFoundException;
 import com.bidding.auction.exception.ProductNotFoundException;
 import com.bidding.auction.models.Bid;
 import com.bidding.auction.models.Products;
@@ -13,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class BidServiceImpl implements BidService {
@@ -42,5 +44,13 @@ public class BidServiceImpl implements BidService {
                 .bidTs(LocalDateTime.now())
                 .build();
         return bidRepository.save(bid);
+    }
+
+    public List<Bid> getBidDetails(Long productId) {
+        List<Bid> bidList = bidRepository.findByProductId(productId);
+        if (bidList.isEmpty()) {
+            throw new BidNotFoundException("No Bid information available");
+        }
+        return bidList;
     }
 }

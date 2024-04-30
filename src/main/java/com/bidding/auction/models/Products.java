@@ -1,6 +1,5 @@
 package com.bidding.auction.models;
 
-import com.bidding.auction.enums.ProductStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +23,7 @@ public class Products {
     private String description;
     private String category;
     private BigDecimal minBid;
-    private ProductStatus status;
+    private String status;
     private LocalDate createdDate;
     private String sellerName;
     private String winningBidBuyer;

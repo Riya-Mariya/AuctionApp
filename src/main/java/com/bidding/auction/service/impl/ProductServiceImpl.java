@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
                 .productName(productDto.getProductName())
                 .description(productDto.getDescription())
                 .category(productDto.getCategory())
-                .status(ProductStatus.AVAILABLE)
+                .status(ProductStatus.AVAILABLE.name())
                 .minBid(productDto.getMinBid())
                 .createdDate(LocalDate.now())
                 .sellerName(authentication.getName())

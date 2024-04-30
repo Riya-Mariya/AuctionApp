@@ -24,12 +24,8 @@ public class AuctionController {
     @PreAuthorize("hasAuthority('SELLER')")
     @PutMapping("/{productId}/endAuction")
     public ResponseEntity<Object> endAuction(@PathVariable Long productId) {
-        try {
-            Bid endedProduct = auctionService.endAuction(productId);
-            return ResponseEntity.ok(endedProduct);
-        } catch (Exception e) {
-            logger.error("Exception endAuction {}", e.getMessage());
-            return ResponseEntity.badRequest().body("Error while finding the winner");
-        }
+        Bid endedProduct = auctionService.endAuction(productId);
+        return ResponseEntity.ok(endedProduct);
+
     }
 }

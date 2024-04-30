@@ -28,7 +28,7 @@ public class AuctionServiceImpl implements AuctionService {
         Bid winningBid = bidRepository.findFirstByProductIdOrderByAmountDescBidTsAsc(productId)
                 .orElseThrow(() -> new BidNotFoundException("No bids found for the product with id: " + productId));
 
-        product.setStatus(ProductStatus.SOLD);
+        product.setStatus(ProductStatus.SOLD.name());
         product.setWinningBidBuyer(winningBid.getBuyerName());
         productRepository.save(product);
 
