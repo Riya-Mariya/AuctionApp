@@ -5,7 +5,6 @@ import com.bidding.auction.enums.ProductStatus;
 import com.bidding.auction.models.Products;
 import com.bidding.auction.repository.ProductRepository;
 import com.bidding.auction.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -15,8 +14,11 @@ import java.time.LocalDate;
 @Service
 
 public class ProductServiceImpl implements ProductService {
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
     public Products registerProducts(ProductDto productDto) {

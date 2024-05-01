@@ -27,4 +27,5 @@ public class Products {
     private LocalDate createdDate;
     private String sellerName;
     private String winningBidBuyer;
+    private BigDecimal winningPrice;
 }

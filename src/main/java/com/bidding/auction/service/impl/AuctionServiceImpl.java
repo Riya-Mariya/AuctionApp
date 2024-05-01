@@ -30,6 +30,7 @@ public class AuctionServiceImpl implements AuctionService {
 
         product.setStatus(ProductStatus.SOLD.name());
         product.setWinningBidBuyer(winningBid.getBuyerName());
+        product.setWinningPrice(winningBid.getAmount());
         productRepository.save(product);
 
         return winningBid;
